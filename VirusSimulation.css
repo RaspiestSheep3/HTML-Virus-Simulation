@@ -1,0 +1,149 @@
+/* General Layout */
+:root {
+    --backgroundColour: #201f23;
+    --fontColour: #b5b2a6;
+    --borderColour: #b5b2a6;
+    --switchButtonColour: #201f23;
+    --switchButtonColourActive: #0d2b45;
+    --gridItemSpacing: 2px;
+    --cellSize: 16px;
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    align-items: center; /* Center sections horizontally */
+    margin: 0;
+    padding: 0;
+    background-color: var(--backgroundColour);
+    color: var(--fontColour);
+    font-family: "Roboto Mono", serif;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 60px;
+    border: 3px solid var(--borderColour);
+    border-radius: 20px;
+    padding: 10px;
+    color: var(--fontColour);
+}
+
+/* Search Section */
+.search {
+    width: 80%; /* Center the search bar and its content */
+    margin-bottom: 20px; /* Space between search and the tracking display */
+    text-align: center;
+}
+
+.search h1 {
+    margin-bottom: 10px; /* Add space between heading and input */
+}
+
+#myInput {
+    width: 50%; /* Input width */
+    padding: 10px; /* Padding inside the input */
+    font-size: 16px;
+    border: 1px solid var(--borderColour);
+    border-radius: 10px;
+    background-color: #2d5c56;
+    color: var(--fontColour);
+    margin-bottom: 10px; /* Space below the input */
+}
+
+#myUL {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0 auto; /* Center the list */
+    width: 50%;
+}
+
+#myUL li a {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #1f3741;
+    color: #cad670;
+    text-decoration: none;
+    border: 1px solid #cad670;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+#myUL li a:hover {
+    background-color: #2d5c56;
+    text-decoration: underline;
+}
+
+/* Tracking Number Display */
+.trackingNumDisplay {
+    width: 80%; /* Align with search section width */
+    margin-bottom: 20px;
+    text-align: center;
+    padding: 10px;
+    border: 3px solid var(--borderColour);
+    border-radius: 20px;
+}
+
+/* Board Section */
+.board {
+    display: grid; /* Use grid for the simulation */
+    grid-template-columns: repeat(30, var(--cellSize)); /* Adjust based on gridSize */
+    grid-gap: var(--gridItemSpacing);
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 3px solid var(--borderColour);
+    border-radius: 10px;
+    max-width: 90%; /* Ensure it doesn’t overflow the page */
+    overflow-x: auto; /* Add horizontal scrolling if needed */
+    justify-content: center; /* Center grid within its container */
+}
+
+/* Simulation Button */
+.simulationButton {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border: 3px solid var(--borderColour);
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: var(--switchButtonColour);
+    color: var(--fontColour);
+    transition: transform 0.2s;
+}
+
+.simulationButton:hover {
+    transform: scale(1.1);
+}
+
+/* Grid Cells */
+.cell {
+    width: var(--cellSize);
+    height: var(--cellSize); /* Define explicit height to prevent inconsistencies */
+    border-radius: 50%;
+}
+
+/* Cell States */
+.healthy {
+    background-color: #3ccc76;
+}
+
+.infected {
+    background-color: #df9825;
+}
+
+.recovered {
+    background-color: #68a3d7;
+}
+
+.dead {
+    background-color: #000000;
+}

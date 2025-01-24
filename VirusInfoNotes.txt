@@ -1,0 +1,4 @@
+rRate : Average number of people it attempts to infect
+mortalityRate : This is a percentage
+timeInBody : This is in days
+reinfectionRate : This is a percentage

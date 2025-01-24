@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virus Simulation</title>
+    <link rel="stylesheet" href="VirusSimulation.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <section class="header displayText">
+        <h1 class="displayText">Virus Simulation</h1>
+    </section> 
+
+    <section class="search">
+        <h1>Search for the target monster below</h1>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Input Here">
+        
+        
+        <ul id="myUL">
+            <li><a href="DNDWebsite - Wraith.html" class="MonsterEntry">Wraith</a></li>
+
+            <li><a href="m2r.html" class="MonsterEntry">Zombie</a></li>
+        </ul>
+        
+    </section>
+
+    <section class="trackingNumDisplay" id="trackingNumDisplay">
+        <h1 class="displayText trackingNumDisplayText">Healthy : 400 Infected : 0 Dead : 0 Recovered : 0</h1>
+    </section>
+    
+    <section class="board" id="displayBoard">
+        
+    </section>
+ 
+    <section class="simulationButton" id="simulationButton">
+        <h1 class="displayText simulationButtonText">Start Simulation</h1>
+    </section>
+
+    <script src="VirusSimulation.js"></script>
+</body>
+</html>
