@@ -94,7 +94,8 @@ function TryInfectOthers(infectedPosition){
     let targetDirections = [];
 
     //Generating directions
-    while(targetDirections.length < rRate){
+    let workingRRate = GenerateWeightedInteger(rRate);
+    while(targetDirections.length < workingRRate){
         let attemptedDirection = Math.floor(Math.random() * 4) + 1;
         if(!targetDirections.includes(attemptedDirection)) targetDirections.push(attemptedDirection);
     }
@@ -128,6 +129,20 @@ function TryInfectOthers(infectedPosition){
         }
     }
 
+}
+
+function GenerateWeightedInteger(float){
+    let integerPart = Math.floor(float);  // Integer part of the float
+    let fractionPart = float - integerPart; // Fractional part of the float
+
+    // Use the fractional part as a weight for rounding
+    let randomValue = Math.random();
+
+    if (randomValue < fractionPart) {
+        return integerPart + 1; // Round up if random number is less than the fractional part
+    } else {
+        return integerPart; // Round down if random number is greater or equal to the fractional part
+    }
 }
 
 //Simulation Step
