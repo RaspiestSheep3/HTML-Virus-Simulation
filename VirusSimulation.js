@@ -10,14 +10,16 @@ const virusesList = {
         rRate : 3,
         mortalityRate : 1.5,
         timeInBody : 14,
-        reinfectionRate : 3.5 
+        reinfectionRate : 3.5,
+        timeScale : 7 //Weeks 
     },
     "Norovirus" : {
         name : "Norovirus",
-        rRate : 3,
-        mortalityRate : 1.5,
-        timeInBody : 14,
-        reinfectionRate : 3.5 
+        rRate : 2,
+        mortalityRate : 0.1,
+        timeInBody : 2,
+        reinfectionRate : 70,
+        timeScale : 1 //Days
     }
 };
 
@@ -40,17 +42,22 @@ var rRate = null;
 var mortalityRate = null;
 var timeInBody = null;
 var reinfectionRate = null;
+var timeScale = null;
 
 //Setting values
 function SetInitialValues(virusNameInput){
     let data = virusesList[virusNameInput];
-    if(data){
-        virusName = data.name;
-        rRate = data.rRate;
-        mortalityRate = data.mortalityRate;
-        timeInBody = data.timeInBody;
-        reinfectionRate = data.reinfectionRate;
-    }
+    console.log(data);
+
+    virusName = data.name;
+    rRate = data.rRate;
+    mortalityRate = data.mortalityRate;
+    timeInBody = data.timeInBody;
+    reinfectionRate = data.reinfectionRate;
+    timeScale = data.timeScale;
+    
+
+    console.log(`NAME ${virusName} \nR RATE ${rRate} \nMORTALITY RATE ${mortalityRate}\nTIME IN BODY ${timeInBody}\nREINFECTION RATE ${reinfectionRate}`);
 }
 
 //Creating the original grid
@@ -78,7 +85,8 @@ function SetInfected(infectedPosition) {
     let targetCell = document.getElementById(`${infectedPosition[0]},${infectedPosition[1]}`);
     targetCell.className = "cell infected";
     infectedPositions.push(infectedPosition);
-    generationsLeft.push(timeInBody / 7);
+    generationsLeft.push(Math.floor(timeInBody / timeScale));
+    CalculateNums();
 }
 
 //Attempting to infect others
@@ -130,7 +138,7 @@ function SimulationStep(){
     for(let infectedPosition of infectedPositionsCopy){
         TryInfectOthers(infectedPosition);
     }
-
+    
     console.log(`${JSON.stringify(infectedPositions)} ${JSON.stringify(generationsLeft)}`)
     CalculateNums();
 }
@@ -201,7 +209,45 @@ document.querySelector('.board').addEventListener('click', function (event) {
     }
 });
 
+//Setup search
+function SetVirusSearch() {
+    let targetList = document.getElementById("myUL");
+    targetList.innerHTML = "";
+    for(let virus in virusesList){
+        targetList.innerHTML += `<li><h1 class="virusListItem displayText" id="${virus}">${virusesList[virus].name}</h1></li>`;
+    }
+}
+
+function AdjustSearchOptions(){
+    // Declare variables
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('myInput');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName('li');
+   
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("h1")[0];
+        txtValue = a.textContent || a.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+document.querySelector(".search").addEventListener('click', function (event) {
+    if (event.target.classList.contains('virusListItem')) {
+        console.log(event.target.id); 
+        console.log(typeof event.target.id); 
+        SetInitialValues(event.target.id);
+    }
+});
+
+
 window.onload = SetInitialValues("SARS-COV-2");
 window.onload = CreateGrid();
 window.onload = CalculateNums();
-console.log(`NAME ${virusName} \nR RATE ${rRate} \nMORTALITY RATE ${mortalityRate}\nTIME IN BODY ${timeInBody}\nREINFECTION RATE ${reinfectionRate}`);
+window.onload = SetVirusSearch();

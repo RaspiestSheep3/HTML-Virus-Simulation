@@ -4,9 +4,9 @@
     --fontColour: #b5b2a6;
     --borderColour: #b5b2a6;
     --switchButtonColour: #201f23;
-    --switchButtonColourActive: #0d2b45;
+    --highlightColour: #0d2b45;
     --gridItemSpacing: 2px;
-    --cellSize: 16px;
+    --cellSize: 16px; 
 }
 
 body {
@@ -52,7 +52,7 @@ body {
     font-size: 16px;
     border: 1px solid var(--borderColour);
     border-radius: 10px;
-    background-color: #2d5c56;
+    background-color: var(--backgroundColour);
     color: var(--fontColour);
     margin-bottom: 10px; /* Space below the input */
 }
@@ -64,27 +64,28 @@ body {
     width: 50%;
 }
 
-#myUL li a {
+#myUL li h1 {
     display: block;
     padding: 10px;
     margin: 5px 0;
-    background-color: #1f3741;
-    color: #cad670;
+    background-color: var(--backgroundColour);
+    color: var(--fontColour);
     text-decoration: none;
-    border: 1px solid #cad670;
+    border: 1px solid var(--borderColour);
     border-radius: 10px;
     text-align: center;
     transition: 0.2s;
 }
 
-#myUL li a:hover {
-    background-color: #2d5c56;
+#myUL li h1:hover {
+    background-color: var(--highlightColour);
     text-decoration: underline;
+    cursor: pointer;
 }
 
 /* Tracking Number Display */
 .trackingNumDisplay {
-    width: 80%; /* Align with search section width */
+    width: 50%; /* Align with search section width */
     margin-bottom: 20px;
     text-align: center;
     padding: 10px;
@@ -117,11 +118,15 @@ body {
     cursor: pointer;
     background-color: var(--switchButtonColour);
     color: var(--fontColour);
-    transition: transform 0.2s;
+    transition: 0.2s;
 }
 
 .simulationButton:hover {
-    transform: scale(1.1);
+    font-size: 25px;
+    font-weight: 1000;
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--fontColour);
 }
 
 /* Grid Cells */
