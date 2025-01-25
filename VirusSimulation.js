@@ -114,7 +114,8 @@ function TryInfectOthers(infectedPosition){
     //Generating directions
     let workingRRate = GenerateWeightedInteger(rRate);
     while(targetDirections.length < workingRRate){
-        let attemptedDirection = Math.floor(Math.random() * 4) + 1;
+        let attemptedDirection = Math.floor(Math.random() * 16) + 1;
+
         if(!targetDirections.includes(attemptedDirection)) targetDirections.push(attemptedDirection);
     }
 
@@ -122,11 +123,25 @@ function TryInfectOthers(infectedPosition){
         [1 , [-1,0]], //Up
         [2 , [0, 1]], //Right
         [3 , [1, 0]], //Down
-        [4 , [0, -1]] //Left
+        [4 , [0,-1]], //Left
+        [5 , [-1,1]], //Up Right
+        [6 , [1, 1]], //Down Right
+        [7 , [1, -1]], //Down Left
+        [8 , [-1,-1]], //Up Left
+        //2 out
+        [9 ,  [-2,0]], //Up
+        [10 , [0, 2]], //Right
+        [11 , [2, 0]], //Down
+        [12 , [0,-2]], //Left
+        [13 , [-2,2]], //Up Right
+        [14 , [2, 2]], //Down Right
+        [15 , [2, -2]], //Down Left
+        [16 , [-2,-2]], //Up Left
     ]);
-    for(let targetDirection of targetDirections){
-        
-        let targetPoint = [infectedPosition[0] + directionMap.get(targetDirection)[0],infectedPosition[1] + directionMap.get(targetDirection)[1]];
+    for(let targetDirection of targetDirections){ 
+        offset = directionMap.get(targetDirection);
+
+        let targetPoint = [infectedPosition[0] + offset[0],infectedPosition[1] + offset[1]];
         
         let validAttempt = true;
         //Out of bounds
@@ -279,6 +294,8 @@ document.querySelector(".search").addEventListener('click', function (event) {
     }
 });
 
+//DISCLAIMER
+alert("DISCLAIMER : The values used for this sim may not be entirely accurate. This is more of a proof of concept and a personal project");
 
 window.onload = SetInitialValues("SARS-COV-2");
 window.onload = CreateGrid();

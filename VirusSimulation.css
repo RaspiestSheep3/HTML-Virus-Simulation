@@ -107,11 +107,33 @@ body {
     justify-content: center; /* Center grid within its container */
 }
 
+/* Infected and Vaccinated Button */
+.simulationSetting {
+    text-align: center;
+    padding: 5px;
+    /*margin-bottom: 20px; */
+    font-size: 15px;
+    border: 3px solid var(--borderColour);
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: var(--switchButtonColour);
+    color: var(--fontColour);
+    transition: 0.2s;
+}
+
+.simulationSetting:hover {
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--fontColour);
+}
+
 /* Simulation Button */
 .simulationButton {
     text-align: center;
-    padding: 10px;
-    margin-bottom: 20px;
+    padding: 5px;
+    /*margin-bottom: 20px; */
     font-size: 20px;
     border: 3px solid var(--borderColour);
     border-radius: 20px;
@@ -135,7 +157,6 @@ body {
     height: var(--cellSize); /* Define explicit height to prevent inconsistencies */
     border-radius: 50%;
     
-    /*!TEMP */
     border: 1px solid #000000; 
 }
 
@@ -154,4 +175,8 @@ body {
 
 .dead {
     background-color: #000000;
+}
+
+.vaccinated {
+    background-color: #cf17c5;
 }
