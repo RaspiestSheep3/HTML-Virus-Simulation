@@ -5,22 +5,40 @@ const cssRead = getComputedStyle(document.documentElement);
 const gridSize = [30,30];
     //Virus list
 const virusesList = {
+    //NOTE : These values are averages so may not be perfectly accurate.
     "SARS-COV-2" : {
         name : "SARS-COV-2 (Covid-19)",
         rRate : 3,
-        mortalityRate : 1.5,
+        mortalityRate : 0.442,
         timeInBody : 14,
-        reinfectionRate : 3.5,
+        reinfectionRate : 1,
         timeScale : 7 //Weeks 
     },
     "Norovirus" : {
         name : "Norovirus",
-        rRate : 2,
-        mortalityRate : 0.1,
-        timeInBody : 2,
-        reinfectionRate : 70,
+        rRate : 7.26,
+        mortalityRate : 0.001,
+        timeInBody : 3,
+        reinfectionRate : 10,
         timeScale : 1 //Days
-    }
+    },
+    "Influenza" : {
+        name : "Influenza (Flu)",
+        rRate : 1.45, 
+        mortalityRate : 0.1,
+        timeInBody : 4,
+        reinfectionRate : 7,
+        timeScale : 1 //Days
+    },
+    "Measles" : {
+        name : "Measles",
+        rRate : 15,
+        mortalityRate : 0.1,
+        timeInBody : 14,
+        reinfectionRate : 0,
+        timeScale : 7 //Weaks
+    },
+
 };
 
 //Setting inital infected

@@ -134,6 +134,9 @@ body {
     width: var(--cellSize);
     height: var(--cellSize); /* Define explicit height to prevent inconsistencies */
     border-radius: 50%;
+    
+    /*!TEMP */
+    border: 1px solid #000000; 
 }
 
 /* Cell States */
