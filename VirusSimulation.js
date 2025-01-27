@@ -19,7 +19,7 @@ const virusesList = {
         rRate : 7.26,
         mortalityRate : 0.001,
         timeInBody : 3,
-        reinfectionRate : 10,
+        reinfectionRate : 5,
         timeScale : 1 //Days
     },
     "Influenza" : {
@@ -41,8 +41,10 @@ const virusesList = {
 
 };
 
-//Setting inital infected
+//Setting initial simulation
+var settingSimulation = true;
 var settingInitialInfected = true;
+var settingInitialVaccinated = false;
 
 //Positions of infected
 var infectedPositions = []; 
@@ -107,6 +109,13 @@ function SetInfected(infectedPosition) {
     CalculateNums();
 }
 
+//Setting vaccinated
+function SetVaccinated(vaccinatedPosition){
+    let targetCell = document.getElementById(`${vaccinatedPosition[0]},${vaccinatedPosition[1]}`);
+    targetCell.className = "cell vaccinated";
+    CalculateNums();
+}
+
 //Attempting to infect others
 function TryInfectOthers(infectedPosition){
     let targetDirections = [];
@@ -144,11 +153,15 @@ function TryInfectOthers(infectedPosition){
         let targetPoint = [infectedPosition[0] + offset[0],infectedPosition[1] + offset[1]];
         
         let validAttempt = true;
+
+        let cellClassList = document.getElementById(`${targetPoint[0]},${targetPoint[1]}`);
+
         //Out of bounds
         if((targetPoint[0] < 0) || (targetPoint[1] < 0) || (targetPoint[0] >= gridSize[0]) || (targetPoint[1] >= gridSize[1])) validAttempt = false;
         
-        //Infecting already infected / dead cell
-        else if(document.getElementById(`${targetPoint[0]},${targetPoint[1]}`).classList.contains("infected") || document.getElementById(`${targetPoint[0]},${targetPoint[1]}`).classList.contains("dead")) validAttempt = false;
+        //Infecting already infected / dead / vaccinated cell
+
+        else if(cellClassList.classList.contains("infected") || cellClassList.classList.contains("dead") || cellClassList.classList.contains("vaccinated")) validAttempt = false;
    
         //Infecting recovered cell
         else if(document.getElementById(`${targetPoint[0]},${targetPoint[1]}`).classList.contains("recovered")){
@@ -233,8 +246,8 @@ function CalculateNums() {
 
 //Starting simulation
 document.querySelector('.simulationButton').addEventListener('click', function (event) {
-    if(settingInitialInfected){
-        settingInitialInfected = false;
+    if(settingSimulation){
+        settingSimulation = false;
         document.getElementById("simulationButton").innerHTML = `<h1 class="displayText simulationButtonText">Next Simulation Step</h1>`;
         CalculateNums();
         SimulationStep();
@@ -253,7 +266,10 @@ document.querySelector('.board').addEventListener('click', function (event) {
         let cellIdCut = (cellId.split(" ")[0]);
         cellIdCut = cellIdCut.split(",");
         cellPosition = [Number(cellIdCut[0]), Number(cellIdCut[1])];
-        if(settingInitialInfected) SetInfected(cellPosition);
+        if(settingSimulation){ 
+            if(settingInitialInfected) SetInfected(cellPosition);
+            else if(settingInitialVaccinated) SetVaccinated(cellPosition);
+        }
     }
 });
 
@@ -292,6 +308,17 @@ document.querySelector(".search").addEventListener('click', function (event) {
         console.log(typeof event.target.id); 
         SetInitialValues(event.target.id);
     }
+});
+
+//SWITCHING BETWEEN VACCINATED AND INFECTED
+document.querySelector(".infectedButton").addEventListener("click", function (event) {
+    settingInitialInfected = true;
+    settingInitialVaccinated = false;
+});
+
+document.querySelector(".vaccinatedButton").addEventListener("click", function (event) {
+    settingInitialInfected = false;
+    settingInitialVaccinated = true;
 });
 
 //DISCLAIMER
